@@ -76,8 +76,9 @@ function BoundarySplash() {
       aria-labelledby="boundary-splash-title"
     >
       <div className="boundary-splash-stage">
-        <div className="splash-reveal" aria-hidden="true">
-          <div className="splash-reveal-grid" />
+        <div className="splash-reveal">
+          <Header />
+          <HomeHero />
         </div>
 
         <motion.svg
@@ -104,14 +105,12 @@ function BoundarySplash() {
           className="splash-copy"
           style={reduceMotion ? undefined : { opacity: copyOpacity, y: copyY }}
         >
-          <div className="splash-kicker mono"><Mark /> BOUNDARY / RUNTIME AUTHORIZATION</div>
           <h1 id="boundary-splash-title">Protect your<br /><em>boundary.</em></h1>
           <p>Autonomous software moves fast. Control stays ahead.</p>
         </motion.div>
         <motion.div className="splash-scroll-cue mono" style={reduceMotion ? undefined : { opacity: copyOpacity }}>
           <span>SCROLL TO OPEN</span><i aria-hidden="true" />
         </motion.div>
-        <div className="splash-corner splash-corner-left mono">RUNTIME / 001</div>
       </div>
     </section>
   );
@@ -141,6 +140,15 @@ function Header() {
         )}
       </AnimatePresence>
     </header>
+  );
+}
+
+function HomeHero() {
+  return (
+    <section className="hero">
+      <div className="hero-copy"><div className="eyebrow"><span>01</span> RUNTIME AUTHORIZATION</div><motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .65, ease: [.2, .8, .2, 1] }}>Authorize every<br /><em>agent action.</em></motion.h1><p>Runtime control for autonomous software. Define hard boundaries, evaluate actions in context, and require approval before risky operations execute.</p><div className="hero-actions"><Button asChild className="primary-cta"><a href="#access">Request access <ArrowDownRight size={16} /></a></Button><a className="text-link" href="#product">See how it works <ArrowRight size={15} /></a></div><div className="hero-note"><span /> Policy enforced before execution</div></div>
+      <div className="hero-visual"><div className="plot-label top">PROPOSED ACTION</div><RuntimePanel /><div className="plot-label bottom">CONTROL PLANE / US-WEST-2</div></div>
+    </section>
   );
 }
 
@@ -408,11 +416,6 @@ export default function Home() {
   return (
     <main id="top">
       <BoundarySplash />
-      <Header />
-      <section className="hero">
-        <div className="hero-copy"><div className="eyebrow"><span>01</span> RUNTIME AUTHORIZATION</div><motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .65, ease: [.2, .8, .2, 1] }}>Authorize every<br /><em>agent action.</em></motion.h1><p>Runtime control for autonomous software. Define hard boundaries, evaluate actions in context, and require approval before risky operations execute.</p><div className="hero-actions"><Button asChild className="primary-cta"><a href="#access">Request access <ArrowDownRight size={16} /></a></Button><a className="text-link" href="#product">See how it works <ArrowRight size={15} /></a></div><div className="hero-note"><span /> Policy enforced before execution</div></div>
-        <div className="hero-visual"><div className="plot-label top">PROPOSED ACTION</div><RuntimePanel /><div className="plot-label bottom">CONTROL PLANE / US-WEST-2</div></div>
-      </section>
       <CoreIdea /><SystemMap /><SequenceSecurity /><Purpose /><PolicyLayers /><ApprovalExperience /><DeveloperExperience /><IdentityStack /><AuditRecorder /><FinalCTA /><Footer />
     </main>
   );

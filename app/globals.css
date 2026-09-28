@@ -54,18 +54,13 @@ button, a { -webkit-tap-highlight-color: transparent; }
 .boundary-splash { position: relative; height: 190svh; background: var(--paper); }
 .boundary-splash-stage { position: sticky; top: 0; height: 100svh; min-height: 580px; overflow: hidden; isolation: isolate; background: var(--paper); }
 .splash-reveal { position: absolute; inset: 0; z-index: 0; overflow: hidden; background: var(--paper); }
-.splash-reveal-grid { position: absolute; inset: 0; opacity: .55; background-image: linear-gradient(to right, rgb(18 19 17 / .055) 1px, transparent 1px), linear-gradient(to bottom, rgb(18 19 17 / .055) 1px, transparent 1px); background-size: 32px 32px; }
 .splash-curtain { position: absolute; z-index: 2; top: 0; width: 55%; height: 100%; overflow: visible; fill: #10120f; filter: drop-shadow(0 0 22px rgb(0 0 0 / .18)); will-change: transform; }
 .splash-curtain-left { left: 0; }
 .splash-curtain-right { right: 0; }
 .splash-seam { position: absolute; z-index: 3; top: 0; bottom: 0; left: 50%; width: 1px; background: rgb(67 108 255 / .56); box-shadow: 0 0 18px 3px rgb(22 71 232 / .38); transform: translateX(-50%); }
 .splash-seam span { position: absolute; top: 50%; left: 50%; width: 9px; height: 9px; border-radius: 50%; background: #6e8dff; box-shadow: 0 0 0 8px rgb(22 71 232 / .18), 0 0 34px 12px rgb(22 71 232 / .38); transform: translate(-50%, -50%); animation: seam-pulse 2s ease-in-out infinite; }
 .splash-copy { position: absolute; z-index: 4; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 24px; text-align: center; color: #f3f2ec; pointer-events: none; }
-.splash-kicker { display: flex; align-items: center; gap: 13px; color: #949a91; font-size: 10px; letter-spacing: .12em; }
-.splash-kicker .brand-mark { width: 20px; height: 20px; border-color: #7f879b; }
-.splash-kicker .brand-mark span:first-child { background: #5275f6; }
-.splash-kicker .brand-mark span:last-child { border-color: #7f879b; }
-.splash-copy h1 { margin: 36px 0 22px; font-size: clamp(62px, 9.2vw, 148px); line-height: .82; letter-spacing: -.075em; font-weight: 560; }
+.splash-copy h1 { margin: 0 0 42px; font-size: clamp(62px, 9.2vw, 148px); line-height: .82; letter-spacing: -.075em; font-weight: 560; }
 .splash-copy h1 em { color: #5275f6; font-style: normal; }
 .splash-copy p { margin: 0; color: #a8aca4; font-size: clamp(15px, 1.25vw, 19px); line-height: 1.5; }
 .splash-scroll-cue { position: absolute; z-index: 4; left: 50%; bottom: 35px; display: flex; flex-direction: column; align-items: center; gap: 12px; color: #777d75; font-size: 9px; letter-spacing: .12em; transform: translateX(-50%); }
