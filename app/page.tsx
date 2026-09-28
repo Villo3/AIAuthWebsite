@@ -69,8 +69,6 @@ function BoundarySplash() {
   useMotionValueEvent(scrollYProgress, "change", setProgress);
 
   const copyOpacity = progress <= .16 ? 1 : Math.max(0, 1 - ((progress - .16) / .34));
-  const revealProgress = Math.max(0, Math.min(1, (progress - .28) / .4));
-
   return (
     <section
       ref={container}
@@ -78,19 +76,9 @@ function BoundarySplash() {
       aria-labelledby="boundary-splash-title"
     >
       <div className="boundary-splash-stage">
-        <motion.div
-          className="splash-reveal"
-          aria-hidden="true"
-          style={reduceMotion ? undefined : { opacity: revealProgress, transform: `scale(${1.08 - (.08 * revealProgress)})` }}
-        >
+        <div className="splash-reveal" aria-hidden="true">
           <div className="splash-reveal-grid" />
-          <div className="splash-reveal-core">
-            <Mark />
-            <span>CONTROL PLANE</span>
-            <strong>ONLINE</strong>
-          </div>
-          <div className="splash-reveal-meta mono"><span>01 / IDENTITY</span><span>02 / INTENT</span><span>03 / POLICY</span><span>04 / DECISION</span></div>
-        </motion.div>
+        </div>
 
         <motion.svg
           className="splash-curtain splash-curtain-left"
@@ -124,7 +112,6 @@ function BoundarySplash() {
           <span>SCROLL TO OPEN</span><i aria-hidden="true" />
         </motion.div>
         <div className="splash-corner splash-corner-left mono">RUNTIME / 001</div>
-        <div className="splash-corner splash-corner-right mono">CONTROL / ACTIVE</div>
       </div>
     </section>
   );

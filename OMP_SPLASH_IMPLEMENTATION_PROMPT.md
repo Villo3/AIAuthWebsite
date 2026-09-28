@@ -42,7 +42,7 @@ Give each worker the exact files above and a narrow objective. Avoid overlapping
 - Build two near-black curtain/wall halves with organic vertical wave edges that split from the center in direct response to scroll progress.
 - Use a restrained blue seam/glow at the center to make Boundary blue the focal point.
 - Fade and slightly lift the opening copy as the split begins.
-- Reveal a lightweight blue control-plane transition surface behind the walls, then naturally continue into the existing cream page.
+- Reveal the existing warm-paper visual language behind the walls and continue directly into the unchanged header and hero; do not add an intermediate status screen or control-plane message.
 - Keep the animation bidirectional: scrolling upward should close it cleanly.
 - Do not lock the wheel, hijack scrolling, autoplay a long intro, or require a click to enter.
 - Avoid canvas, WebGL, video, and unnecessary image assets. Prefer composited SVG/CSS geometry and transforms.
