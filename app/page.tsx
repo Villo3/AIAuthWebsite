@@ -1,7 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useRef, useState } from "react";
+import {
+  motion, AnimatePresence, useMotionValueEvent, useReducedMotion, useScroll, useTransform,
+} from "framer-motion";
 import {
   ArrowDownRight, ArrowRight, Asterisk, Braces, Check, CheckCircle2,
   ChevronDown, CircleDollarSign, Clock3, Cloud, Copy, Eye,
@@ -51,6 +53,81 @@ const productAppUrl = process.env.NEXT_PUBLIC_APP_URL || "#developers";
 
 function Mark() {
   return <span className="brand-mark" aria-hidden="true"><span /><span /></span>;
+}
+
+function BoundarySplash() {
+  const container = useRef<HTMLElement>(null);
+  const [progress, setProgress] = useState(0);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start start", "end end"],
+  });
+  const leftX = useTransform(scrollYProgress, [0, .18, .9], ["0%", "0%", "-108%"]);
+  const rightX = useTransform(scrollYProgress, [0, .18, .9], ["0%", "0%", "108%"]);
+  const copyY = useTransform(scrollYProgress, [0, .5], [0, -38]);
+  useMotionValueEvent(scrollYProgress, "change", setProgress);
+
+  const copyOpacity = progress <= .16 ? 1 : Math.max(0, 1 - ((progress - .16) / .34));
+  const revealProgress = Math.max(0, Math.min(1, (progress - .28) / .4));
+
+  return (
+    <section
+      ref={container}
+      className={`boundary-splash${reduceMotion ? " boundary-splash-reduced" : ""}`}
+      aria-labelledby="boundary-splash-title"
+    >
+      <div className="boundary-splash-stage">
+        <motion.div
+          className="splash-reveal"
+          aria-hidden="true"
+          style={reduceMotion ? undefined : { opacity: revealProgress, transform: `scale(${1.08 - (.08 * revealProgress)})` }}
+        >
+          <div className="splash-reveal-grid" />
+          <div className="splash-reveal-core">
+            <Mark />
+            <span>CONTROL PLANE</span>
+            <strong>ONLINE</strong>
+          </div>
+          <div className="splash-reveal-meta mono"><span>01 / IDENTITY</span><span>02 / INTENT</span><span>03 / POLICY</span><span>04 / DECISION</span></div>
+        </motion.div>
+
+        <motion.svg
+          className="splash-curtain splash-curtain-left"
+          viewBox="0 0 1000 1000"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          style={reduceMotion ? undefined : { x: leftX }}
+        >
+          <path d="M0 0H905C960 76 930 162 978 242C1018 311 921 400 970 493C1009 568 925 660 974 749C1007 810 932 908 958 1000H0Z" />
+        </motion.svg>
+        <motion.svg
+          className="splash-curtain splash-curtain-right"
+          viewBox="0 0 1000 1000"
+          preserveAspectRatio="none"
+          aria-hidden="true"
+          style={reduceMotion ? undefined : { x: rightX }}
+        >
+          <path d="M1000 0H95C40 76 70 162 22 242C-18 311 79 400 30 493C-9 568 75 660 26 749C-7 810 68 908 42 1000H1000Z" />
+        </motion.svg>
+
+        <div className="splash-seam" aria-hidden="true" style={reduceMotion ? undefined : { opacity: copyOpacity }}><span /></div>
+        <motion.div
+          className="splash-copy"
+          style={reduceMotion ? undefined : { opacity: copyOpacity, y: copyY }}
+        >
+          <div className="splash-kicker mono"><Mark /> BOUNDARY / RUNTIME AUTHORIZATION</div>
+          <h1 id="boundary-splash-title">Protect your<br /><em>boundary.</em></h1>
+          <p>Autonomous software moves fast. Control stays ahead.</p>
+        </motion.div>
+        <motion.div className="splash-scroll-cue mono" style={reduceMotion ? undefined : { opacity: copyOpacity }}>
+          <span>SCROLL TO OPEN</span><i aria-hidden="true" />
+        </motion.div>
+        <div className="splash-corner splash-corner-left mono">RUNTIME / 001</div>
+        <div className="splash-corner splash-corner-right mono">CONTROL / ACTIVE</div>
+      </div>
+    </section>
+  );
 }
 
 function Header() {
@@ -343,6 +420,7 @@ function Footer() {
 export default function Home() {
   return (
     <main id="top">
+      <BoundarySplash />
       <Header />
       <section className="hero">
         <div className="hero-copy"><div className="eyebrow"><span>01</span> RUNTIME AUTHORIZATION</div><motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .65, ease: [.2, .8, .2, 1] }}>Authorize every<br /><em>agent action.</em></motion.h1><p>Runtime control for autonomous software. Define hard boundaries, evaluate actions in context, and require approval before risky operations execute.</p><div className="hero-actions"><Button asChild className="primary-cta"><a href="#access">Request access <ArrowDownRight size={16} /></a></Button><a className="text-link" href="#product">See how it works <ArrowRight size={15} /></a></div><div className="hero-note"><span /> Policy enforced before execution</div></div>
