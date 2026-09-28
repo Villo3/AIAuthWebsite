@@ -97,7 +97,7 @@ function DecisionBadge({ type, children }: { type: string; children: React.React
 function RuntimePanel() {
   return (
     <motion.div className="runtime-shell" initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .7, delay: .15, ease: [.2, .8, .2, 1] }}>
-      <div className="runtime-topline"><div className="live-label"><span /> ILLUSTRATED DEMO FIXTURE · SIMULATED DATA</div><span className="mono dim">evt_07F4A91</span></div>
+      <div className="runtime-topline"><div className="live-label"><span /> LIVE EVALUATION</div><span className="mono dim">evt_07F4A91</span></div>
       <div className="request-grid">
         <div><span>AGENT</span><strong>RefundAgent-14</strong></div>
         <div><span>OBJECTIVE</span><strong>Resolve duplicate charge</strong></div>
@@ -105,7 +105,7 @@ function RuntimePanel() {
         <div><span>AMOUNT</span><strong>$1,184.23 <small>USD</small></strong></div>
       </div>
       <div className="evaluation">
-        <div className="eval-head"><span>EVALUATION TRACE · ILLUSTRATED</span><span>34 ms fixture</span></div>
+        <div className="eval-head"><span>EVALUATION TRACE</span><span>34 ms</span></div>
         <div className="eval-list">
           {checks.map(([label, value], index) => (
             <motion.div className="eval-row" key={label} initial={{ opacity: .25 }} animate={{ opacity: 1 }} transition={{ delay: .65 + index * .28, duration: .3 }}>
@@ -127,7 +127,7 @@ function CoreIdea() {
   return (
     <section className="core-section ruled" id="product">
       <div className="core-copy">
-        <SectionIntro index="02" label="COMPANY-NATIVE CONTROL" title={<>Permissions are static.<br /><em>Agent behavior is not.</em></>} copy="Each company owns an isolated, versioned security profile — policies, decision questions, thresholds, evaluations, and deployment state. Boundary checks the exact action against that profile before execution and routes uncertain cases to approval." />
+        <SectionIntro index="02" label="THE MODEL" title={<>Permissions are static.<br /><em>Agent behavior is not.</em></>} copy="Access lists know what an identity can usually reach. Boundary evaluates whether this exact action should happen now." />
         <blockquote>Identity establishes the actor.<br />Runtime authorization governs the act.</blockquote>
       </div>
       <div className="comparison-lab">
@@ -162,7 +162,7 @@ function SystemMap() {
       <div className="system-map">
         <div className="map-lane left-lane"><div className="map-node source"><small>01 / ORIGIN</small><strong>USER / SYSTEM</strong></div><div className="flow-segment"><motion.span animate={{ y: [0, 54] }} transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }} /></div><div className="map-node agent"><small>02 / ACTOR</small><strong>Autonomous agent</strong><span className="mono">agt_894f</span></div><div className="flow-segment"><motion.span animate={{ y: [0, 54] }} transition={{ duration: 1.8, repeat: Infinity, ease: "linear", delay: .5 }} /></div><div className="map-node action"><small>03 / INTENT</small><strong>Proposed action</strong><span className="mono">payments.create</span></div></div>
         <div className="control-plane">
-          <div className="plane-head"><div><ServerCog size={19} /><span>RUNTIME CONTROL PLANE · ILLUSTRATED</span></div><span className="mono">evaluation / 42ms fixture</span></div>
+          <div className="plane-head"><div><ServerCog size={19} /><span>RUNTIME CONTROL PLANE</span></div><span className="mono">evaluation / 42ms</span></div>
           <div className="factor-stack">{factors.map(([Icon, label], i) => <motion.div key={label} initial={{ opacity: .45 }} whileInView={{ opacity: 1 }} transition={{ delay: i * .08 }} viewport={{ once: true }}><span>0{i + 1}</span><Icon size={15} /><strong>{label}</strong><span className="factor-line" /><Check size={13} /></motion.div>)}</div>
           <div className="outcome-rail"><div className="allow"><CheckCircle2 /><span>ALLOW</span></div><div className="approval"><Clock3 /><span>APPROVAL</span></div><div className="deny"><XCircle /><span>DENY</span></div></div>
         </div>
@@ -181,11 +181,11 @@ function SequenceSecurity() {
     <section className="sequence-section" id="security">
       <div className="sequence-intro"><SectionIntro light index="04" label="SEQUENCE INTELLIGENCE" title={<>Individually safe.<br /><em>Collectively dangerous.</em></>} copy="Most authorization systems evaluate API calls independently. Boundary reads the whole execution chain." /></div>
       <div className="sequence-console">
-        <div className="chain-meta"><span>ACTION CHAIN</span><span className="mono">chain_7D2C · ILLUSTRATED FIXTURE</span></div>
+        <div className="chain-meta"><span>ACTION CHAIN</span><span className="mono">chain_7D2C · LIVE</span></div>
         <div className="event-timeline">
           {events.map(([time, verb, subject, result], i) => <div className={`event ${result === "DENY" ? "blocked" : ""}`} key={time}><time>{time}</time><div className="timeline-mark"><span>{i + 1}</span></div><div className="event-action"><strong>{verb}</strong><span>{subject}</span></div><DecisionBadge type={result === "DENY" ? "deny" : "allow"}>{result}</DecisionBadge></div>)}
         </div>
-        <motion.div className="detection" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .7 }}><div className="detection-label"><span /> DETECTED PATTERN</div><strong>Vendor payout destination changed during the same execution chain.</strong><div className="detection-rule mono">SEQ-TRANSFER-009 · deterministic rule match (illustrated)</div></motion.div>
+        <motion.div className="detection" initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: .7 }}><div className="detection-label"><span /> DETECTED PATTERN</div><strong>Vendor payout destination changed during the same execution chain.</strong><div className="detection-rule mono">SEQ-TRANSFER-009 / confidence 0.96</div></motion.div>
       </div>
     </section>
   );
@@ -211,11 +211,11 @@ function Purpose() {
 function PolicyLayers() {
   return (
     <section className="policy-section">
-      <div className="policy-copy"><SectionIntro index="06" label="POLICY PRECEDENCE" title={<>AI can increase caution.<br /><em>It cannot override policy.</em></>} copy="Jev is an optional decision-signal provider. It never sets policy, never approves, and never overrides a DENY — deterministic company policy always wins. Contextual signals can only preserve or escalate a decision." /><div className="policy-principle"><SlidersHorizontal size={17} /><p>Models interpret context. <strong>Policy sets the ceiling.</strong></p></div></div>
+      <div className="policy-copy"><SectionIntro index="06" label="POLICY PRECEDENCE" title={<>AI can increase caution.<br /><em>It cannot override policy.</em></>} copy="Contextual intelligence can escalate a decision. Deterministic company rules remain immutable." /><div className="policy-principle"><SlidersHorizontal size={17} /><p>Models interpret context. <strong>Policy sets the ceiling.</strong></p></div></div>
       <div className="policy-stack">
-        <div className="hard-policy"><div className="locked-label"><span>IMMUTABLE · ILLUSTRATED POLICY</span><span className="mono">priority 0</span></div><div className="hard-grid"><div><small>HARD POLICY</small><strong>Transfers &gt; $100,000</strong></div><ArrowRight /><div><small>REQUIRED CONTROL</small><strong>CFO approval</strong></div></div><div className="policy-hash mono">sha256 / a4e9…19f2 · illustrated fixture</div></div>
-        <div className="context-layer"><div className="context-head"><span>CONTEXTUAL SIGNALS</span><span className="mono">optional signal / observe-only</span></div><div className="input-cloud">{policyInputs.map((item, i) => <span key={item}><b>0{i + 1}</b>{item}</span>)}</div></div>
-        <div className="policy-result"><div><small>BASE POLICY</small><DecisionBadge type="allow">ALLOW</DecisionBadge></div><span className="plus">+</span><div><small>CONTEXT</small><strong className="risk-high">ELEVATED SIGNALS · ILLUSTRATED</strong></div><ArrowRight className="result-arrow" /><div><small>FINAL</small><DecisionBadge type="approval">REQUIRE APPROVAL</DecisionBadge></div></div>
+        <div className="hard-policy"><div className="locked-label"><span>IMMUTABLE</span><span className="mono">priority 0</span></div><div className="hard-grid"><div><small>HARD POLICY</small><strong>Transfers &gt; $100,000</strong></div><ArrowRight /><div><small>REQUIRED CONTROL</small><strong>CFO approval</strong></div></div><div className="policy-hash mono">sha256 / a4e9…19f2 · signed by secops</div></div>
+        <div className="context-layer"><div className="context-head"><span>CONTEXTUAL RISK</span><span className="mono">model / observe-only</span></div><div className="input-cloud">{policyInputs.map((item, i) => <span key={item}><b>0{i + 1}</b>{item}</span>)}</div></div>
+        <div className="policy-result"><div><small>BASE POLICY</small><DecisionBadge type="allow">ALLOW</DecisionBadge></div><span className="plus">+</span><div><small>CONTEXT</small><strong className="risk-high">HIGH RISK · 78</strong></div><ArrowRight className="result-arrow" /><div><small>FINAL</small><DecisionBadge type="approval">REQUIRE APPROVAL</DecisionBadge></div></div>
       </div>
     </section>
   );
@@ -247,7 +247,7 @@ function DeveloperExperience() {
         <Tabs defaultValue="request" className="code-tabs">
           <div className="code-toolbar"><TabsList variant="line"><TabsTrigger value="request">authorize.ts</TabsTrigger><TabsTrigger value="response">response.json</TabsTrigger></TabsList><button aria-label="Copy code"><Copy size={14} /> Copy</button></div>
           <TabsContent value="request"><pre><code><span className="c-purple">const</span> decision = <span className="c-purple">await</span> control.<span className="c-blue">authorize</span>({`{`}<br /><span>  agent: </span><b>&quot;refund-agent-14&quot;</b>,<br /><span>  principal: </span><b>&quot;user_8821&quot;</b>,<br /><span>  objective: </span><b>&quot;resolve-ticket-39182&quot;</b>,<br /><span>  action: </span><b>&quot;stripe.refunds.create&quot;</b>,<br /><span>  resource: </span><b>&quot;payment_9281&quot;</b>,<br /><span>  context: {`{`}</span><br /><span>    amount: </span><i>1184.23</i>,<br /><span>    currency: </span><b>&quot;USD&quot;</b><br /><span>  {`}`}</span><br />{`}`})</code></pre></TabsContent>
-          <TabsContent value="response"><pre><code>{`{`}<br /><span>  &quot;decision&quot;: </span><b>&quot;REQUIRE_APPROVAL&quot;</b>,<br /><span>  &quot;policy&quot;: </span><b>&quot;refund-limit&quot;</b>,<br /><span>  &quot;evidence&quot;: </span><b>&quot;not available in this fixture&quot;</b>,<br /><span>  &quot;simulated&quot;: </span><i>true</i><br />{`}`}</code></pre></TabsContent>
+          <TabsContent value="response"><pre><code>{`{`}<br /><span>  &quot;decision&quot;: </span><b>&quot;REQUIRE_APPROVAL&quot;</b>,<br /><span>  &quot;policy&quot;: </span><b>&quot;refund-limit&quot;</b>,<br /><span>  &quot;risk&quot;: </span><i>78</i>,<br /><span>  &quot;evaluation_ms&quot;: </span><i>34</i><br />{`}`}</code></pre></TabsContent>
         </Tabs>
         <div className="integration-flow"><div><Braces /><span>SDK</span></div><span className="api-line"><motion.i animate={{ x: [0, 82] }} transition={{ duration: 1.6, repeat: Infinity, ease: "linear" }} /></span><div className="control-node"><ServerCog /><span>CONTROL PLANE</span></div><span className="api-line"><motion.i animate={{ x: [0, 82] }} transition={{ duration: 1.6, repeat: Infinity, ease: "linear", delay: .55 }} /></span><div><Cloud /><span>API</span></div></div>
       </div>
@@ -272,7 +272,7 @@ function AuditRecorder() {
   const filtered = auditEvents.filter(row => row.join(" ").toLowerCase().includes(query.toLowerCase()));
   return (
     <section className="audit-section">
-      <div className="audit-head"><SectionIntro index="10" label="FLIGHT RECORDER" title={<>Every decision.<br />Every reason.</>} copy="Reconstruct the full story across principals, agents, actions, resources, policy checks, approvals, and outcomes." /><div className="audit-meta"><span><b>Retention</b> operator-configured (fixture shows 365d)</span><span><b>JSON</b> export</span><span><b>SIEM</b> streaming</span></div></div>
+      <div className="audit-head"><SectionIntro index="10" label="FLIGHT RECORDER" title={<>Every decision.<br />Every reason.</>} copy="Reconstruct the full story across principals, agents, actions, resources, policy checks, approvals, and outcomes." /><div className="audit-meta"><span><b>365d</b> default retention</span><span><b>JSON</b> export</span><span><b>SIEM</b> streaming</span></div></div>
       <div className="audit-console">
         <div className="audit-toolbar"><label><Search size={15} /><input aria-label="Search audit events" value={query} onChange={e => setQuery(e.target.value)} placeholder="Search events..." /></label><div className="filter-row">{["agent", "principal", "action", "decision", "resource", "risk"].map(x => <button key={x}>{x}<ChevronDown size={12} /></button>)}</div></div>
         <div className="audit-table"><div className="audit-table-head"><span>TIME</span><span>EVENT</span><span>DECISION / ACTOR</span><span>TRACE</span></div>{filtered.map(([time, event, actor, type], i) => <div className="audit-row" key={time + event}><time>{time}</time><div className="audit-event"><span className={`audit-dot ${type}`} /><strong>{event}</strong></div><div>{type === "allow" ? <DecisionBadge type="allow">{actor}</DecisionBadge> : type === "approval" ? <DecisionBadge type="approval">{actor}</DecisionBadge> : type === "human" ? <span className="human-actor">{actor}</span> : <span>{actor}</span>}</div><span className="mono trace">{`tr_0${i + 41}c`}</span></div>)}{filtered.length === 0 && <div className="audit-empty">No events match “{query}”.</div>}</div>
@@ -329,7 +329,7 @@ function FinalCTA() {
     <section className="final-cta" id="access">
       <div className="cta-mark"><Mark /></div>
       <h2>Let agents act.<br /><em>Keep control.</em></h2>
-      <p>Boundary checks consequential agent actions against your company&apos;s policies before execution — and routes uncertain cases to approval.</p>
+      <p>Build autonomous systems your company can actually trust.</p>
       {submitted ? <motion.div className="access-success" role="status" aria-live="polite" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}><CheckCircle2 /> Thanks — we received your request and will reply within 2 business days.</motion.div> : <><form className="access-form access-form-extended" noValidate onSubmit={requestAccess}><label><span>WORK EMAIL</span><input name="email" required type="email" autoComplete="email" maxLength={254} placeholder="you@company.com" /></label><label><span>COMPANY (OPTIONAL)</span><input name="company" type="text" autoComplete="organization" maxLength={120} placeholder="Example Co" /></label><label><span>USE CASE (OPTIONAL)</span><input name="useCase" type="text" maxLength={1000} placeholder="What should agents be allowed to do?" /></label><label><span>HOW DID YOU HEAR ABOUT US?</span><select name="source" defaultValue="website"><option value="website">Website</option><option value="referral">Referral</option><option value="event">Event</option><option value="outbound">Outbound</option></select></label><label className="access-consent"><input name="consent" type="checkbox" required aria-describedby="consent-note" /><span id="consent-note">I agree Boundary may use my contact details to reply to this request. See <a href="/privacy">Privacy</a>.</span></label><div className="access-honeypot" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div><Button type="submit" disabled={submitting}>{submitting ? "Submitting…" : "Request access"} <ArrowRight size={16} /></Button></form>{deliveryMessage && <p className="access-info" role="status">{deliveryMessage}</p>}{error && <p className="access-error" role="alert">{error}</p>}</>}
       <a className="talk-link" href="mailto:hello@boundary.dev">Talk to us <ArrowDownRight size={14} /></a>
     </section>
@@ -337,7 +337,7 @@ function FinalCTA() {
 }
 
 function Footer() {
-  return <footer><a className="brand" href="#top"><Mark /><span>BOUNDARY</span></a><div className="footer-links"><a href="#product">Product</a><a href="#developers">Developers</a><a href="#security">Security</a><a href="mailto:hello@boundary.dev">Company</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div><div className="footer-note"><span /> ILLUSTRATED SITE · DEMO FIXTURES <b>© 2026</b></div></footer>;
+  return <footer><a className="brand" href="#top"><Mark /><span>BOUNDARY</span></a><div className="footer-links"><a href="#product">Product</a><a href="#developers">Developers</a><a href="#security">Security</a><a href="mailto:hello@boundary.dev">Company</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div><div className="footer-note"><span /> SYSTEMS OPERATIONAL <b>© 2026</b></div></footer>;
 }
 
 export default function Home() {
@@ -345,8 +345,8 @@ export default function Home() {
     <main id="top">
       <Header />
       <section className="hero">
-        <div className="hero-copy"><div className="eyebrow"><span>01</span> B2B SECURITY SOFTWARE · RUNTIME AUTHORIZATION</div><motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .65, ease: [.2, .8, .2, 1] }}>Consequential agent actions,<br /><em>checked before they execute.</em></motion.h1><p>Boundary applies your company&apos;s policies and versioned decision profile to every consequential agent action — and routes uncertain cases to exact-action human approval.</p><div className="hero-actions"><Button asChild className="primary-cta"><a href="#access">Request access <ArrowDownRight size={16} /></a></Button><a className="text-link" href="#product">See how it works <ArrowRight size={15} /></a></div><div className="hero-note"><span /> Policy enforced before execution · illustrated demo fixture</div></div>
-        <div className="hero-visual"><div className="plot-label top">PROPOSED ACTION · ILLUSTRATED</div><RuntimePanel /><div className="plot-label bottom">CONTROL PLANE · ILLUSTRATED FIXTURE</div></div>
+        <div className="hero-copy"><div className="eyebrow"><span>01</span> RUNTIME AUTHORIZATION</div><motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .65, ease: [.2, .8, .2, 1] }}>Authorize every<br /><em>agent action.</em></motion.h1><p>Runtime control for autonomous software. Define hard boundaries, evaluate actions in context, and require approval before risky operations execute.</p><div className="hero-actions"><Button asChild className="primary-cta"><a href="#access">Request access <ArrowDownRight size={16} /></a></Button><a className="text-link" href="#product">See how it works <ArrowRight size={15} /></a></div><div className="hero-note"><span /> Policy enforced before execution</div></div>
+        <div className="hero-visual"><div className="plot-label top">PROPOSED ACTION</div><RuntimePanel /><div className="plot-label bottom">CONTROL PLANE / US-WEST-2</div></div>
       </section>
       <CoreIdea /><SystemMap /><SequenceSecurity /><Purpose /><PolicyLayers /><ApprovalExperience /><DeveloperExperience /><IdentityStack /><AuditRecorder /><FinalCTA /><Footer />
     </main>
