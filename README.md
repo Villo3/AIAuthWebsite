@@ -1,0 +1,57 @@
+# Boundary website
+
+The standalone public website for Boundary, the runtime authorization layer for consequential
+AI-agent actions. This repository contains only the marketing site, legal pages, and access-request
+form. The private control-plane application and backend live separately.
+
+## Local development
+
+Requirements: Node.js 22 and npm.
+
+```bash
+npm ci
+npm run dev
+```
+
+Open `http://localhost:3000`.
+
+Before pushing changes:
+
+```bash
+npm run lint
+npm run check
+npm run build
+```
+
+## Deploy to Vercel
+
+1. In Vercel, choose **Add New → Project**.
+2. Import this GitHub repository.
+3. Leave the framework preset as **Next.js**.
+4. Keep the root directory as `.` and the default install/build/output settings.
+5. Deploy. No environment variables are required for the website to build and run.
+
+Vercel reads Node 22 from `package.json`. Pull requests and pushes to the production branch receive
+normal Vercel preview/production deployments after the GitHub integration is enabled.
+
+## Optional environment variables
+
+| Variable | Purpose |
+| --- | --- |
+| `NEXT_PUBLIC_SITE_URL` | Canonical production origin used by page metadata. |
+| `NEXT_PUBLIC_APP_URL` | Product sign-in destination. Without it, Sign in scrolls to Developers. |
+| `ACCESS_REQUEST_EMAIL` | Address used by the zero-config prefilled-email access flow. Defaults to `hello@boundary.dev`. |
+| `ACCESS_REQUEST_WEBHOOK_URL` | Private HTTPS endpoint receiving validated access-request JSON. |
+| `ACCESS_REQUEST_WEBHOOK_SECRET` | Optional bearer secret sent only from the serverless route to the webhook. |
+
+Without a webhook, the access form validates the request and opens the visitor's email application
+with a prefilled message. This keeps a new Vercel deployment functional without requiring a database
+or third-party account. With a webhook configured, the serverless route sends the validated request
+server-side and shows the success state.
+
+## Repository boundaries
+
+- Never place control-plane API keys, Jev credentials, or webhook secrets in `NEXT_PUBLIC_*` variables.
+- The illustrated decisions, latencies, and traces on the marketing page are labeled demo fixtures.
+- This repository does not contain the Boundary control-plane backend, customer data, or production
+  decision history.
