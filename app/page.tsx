@@ -356,7 +356,6 @@ function FinalCTA() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
-  const [deliveryMessage, setDeliveryMessage] = useState("");
 
   async function requestAccess(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -368,7 +367,6 @@ function FinalCTA() {
     }
     setSubmitting(true);
     setError("");
-    setDeliveryMessage("");
     try {
       const response = await fetch("/api/access-requests", {
         method: "POST",
@@ -382,16 +380,11 @@ function FinalCTA() {
           website: fields.get("website"),
         }),
       });
-      const result = await response.json() as { error?: string; delivery?: "email" | "webhook"; mailtoUrl?: string };
-      if (!response.ok) throw new Error(result.error || "We could not save your request. Please try again.");
-      if (result.delivery === "email" && result.mailtoUrl) {
-        window.location.href = result.mailtoUrl;
-        setDeliveryMessage("Your email app should open with a prefilled request. Send that message to finish.");
-      } else {
-        setSubmitted(true);
-      }
+      const result = await response.json() as { error?: string };
+      if (!response.ok) throw new Error(result.error || "We could not send your request. Please try again.");
+      setSubmitted(true);
     } catch (cause) {
-      setError(cause instanceof Error ? cause.message : "We could not save your request. Please try again.");
+      setError(cause instanceof Error ? cause.message : "We could not send your request. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -401,7 +394,7 @@ function FinalCTA() {
       <div className="cta-mark"><Mark /></div>
       <h2>Let agents act.<br /><em>Keep control.</em></h2>
       <p>Build autonomous systems your company can actually trust.</p>
-      {submitted ? <motion.div className="access-success" role="status" aria-live="polite" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}><CheckCircle2 /> Thanks — we received your request and will reply within 2 business days.</motion.div> : <><form className="access-form access-form-extended" noValidate onSubmit={requestAccess}><label><span>WORK EMAIL</span><input name="email" required type="email" autoComplete="email" maxLength={254} placeholder="you@company.com" /></label><label><span>COMPANY (OPTIONAL)</span><input name="company" type="text" autoComplete="organization" maxLength={120} placeholder="Example Co" /></label><label><span>USE CASE (OPTIONAL)</span><input name="useCase" type="text" maxLength={1000} placeholder="What should agents be allowed to do?" /></label><label><span>HOW DID YOU HEAR ABOUT US?</span><select name="source" defaultValue="website"><option value="website">Website</option><option value="referral">Referral</option><option value="event">Event</option><option value="outbound">Outbound</option></select></label><label className="access-consent"><input name="consent" type="checkbox" required aria-describedby="consent-note" /><span id="consent-note">I agree Boundary may use my contact details to reply to this request. See <a href="/privacy">Privacy</a>.</span></label><div className="access-honeypot" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div><Button type="submit" disabled={submitting}>{submitting ? "Submitting…" : "Request access"} <ArrowRight size={16} /></Button></form>{deliveryMessage && <p className="access-info" role="status">{deliveryMessage}</p>}{error && <p className="access-error" role="alert">{error}</p>}</>}
+      {submitted ? <motion.div className="access-success" role="status" aria-live="polite" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}><CheckCircle2 /> Thanks — we received your request and will reply within 2 business days.</motion.div> : <><form className="access-form access-form-extended" noValidate onSubmit={requestAccess}><label><span>WORK EMAIL</span><input name="email" required type="email" autoComplete="email" maxLength={254} placeholder="you@company.com" /></label><label><span>COMPANY (OPTIONAL)</span><input name="company" type="text" autoComplete="organization" maxLength={120} placeholder="Example Co" /></label><label><span>USE CASE (OPTIONAL)</span><input name="useCase" type="text" maxLength={1000} placeholder="What should agents be allowed to do?" /></label><label><span>HOW DID YOU HEAR ABOUT US?</span><select name="source" defaultValue="website"><option value="website">Website</option><option value="referral">Referral</option><option value="event">Event</option><option value="outbound">Outbound</option></select></label><label className="access-consent"><input name="consent" type="checkbox" required aria-describedby="consent-note" /><span id="consent-note">I agree Boundary may use my contact details to reply to this request. See <a href="/privacy">Privacy</a>.</span></label><div className="access-honeypot" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div><Button type="submit" disabled={submitting}>{submitting ? "Submitting…" : "Request access"} <ArrowRight size={16} /></Button></form>{error && <p className="access-error" role="alert">{error}</p>}</>}
       <a className="talk-link" href="mailto:hello@boundary.dev">Talk to us <ArrowDownRight size={14} /></a>
     </section>
   );

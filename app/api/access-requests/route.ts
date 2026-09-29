@@ -5,23 +5,15 @@ export const runtime = "nodejs";
 
 const NO_STORE = { "Cache-Control": "no-store" };
 
-function mailtoUrl(lead: {
-  email: string;
-  company?: string;
-  useCase?: string;
-  source: string;
-}) {
-  const recipient = process.env.ACCESS_REQUEST_EMAIL || "hello@boundary.dev";
-  const subject = `Boundary access request${lead.company ? ` — ${lead.company}` : ""}`;
-  const body = [
-    `Work email: ${lead.email}`,
-    `Company: ${lead.company || "Not provided"}`,
-    `Source: ${lead.source}`,
-    "",
-    "Use case:",
-    lead.useCase || "Not provided",
-  ].join("\n");
-  return `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+const GENERIC_DELIVERY_ERROR = "We could not send your request. Please try again.";
+
+type DeliveryFetch = (url: URL | RequestInfo, init?: RequestInit) => Promise<Response>;
+
+// Injectable seam for tests. The production route always uses global fetch.
+let deliveryFetch: DeliveryFetch = (url, init) => fetch(url, init);
+
+export function __setDeliveryFetchForTests(fetchImpl: DeliveryFetch) {
+  deliveryFetch = fetchImpl;
 }
 
 export async function POST(request: Request) {
@@ -36,6 +28,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Enter a valid work email." }, { status: 400, headers: NO_STORE });
   }
 
+  // Honeypot: pretend success without recording or forwarding anything.
   if (input && typeof input === "object" && "website" in input && input.website) {
     return NextResponse.json({ ok: true }, { headers: NO_STORE });
   }
@@ -48,8 +41,8 @@ export async function POST(request: Request) {
   const webhookUrl = process.env.ACCESS_REQUEST_WEBHOOK_URL?.trim();
   if (!webhookUrl) {
     return NextResponse.json(
-      { ok: true, delivery: "email", mailtoUrl: mailtoUrl(validated.value) },
-      { headers: NO_STORE },
+      { error: "Access requests are temporarily unavailable. Please try again later." },
+      { status: 503, headers: NO_STORE },
     );
   }
 
@@ -58,10 +51,7 @@ export async function POST(request: Request) {
     parsedWebhook = new URL(webhookUrl);
     if (parsedWebhook.protocol !== "https:") throw new Error("Webhook must use HTTPS");
   } catch {
-    return NextResponse.json(
-      { error: "Access requests are temporarily unavailable. Email hello@boundary.dev." },
-      { status: 503, headers: NO_STORE },
-    );
+    return NextResponse.json({ error: GENERIC_DELIVERY_ERROR }, { status: 503, headers: NO_STORE });
   }
 
   const headers: Record<string, string> = { "Content-Type": "application/json" };
@@ -70,7 +60,7 @@ export async function POST(request: Request) {
   }
 
   try {
-    const response = await fetch(parsedWebhook, {
+    const response = await deliveryFetch(parsedWebhook, {
       method: "POST",
       headers,
       body: JSON.stringify({
@@ -82,10 +72,7 @@ export async function POST(request: Request) {
     });
     if (!response.ok) throw new Error(`Webhook returned ${response.status}`);
   } catch {
-    return NextResponse.json(
-      { error: "We could not send your request. Please email hello@boundary.dev." },
-      { status: 503, headers: NO_STORE },
-    );
+    return NextResponse.json({ error: GENERIC_DELIVERY_ERROR }, { status: 503, headers: NO_STORE });
   }
 
   return NextResponse.json({ ok: true, delivery: "webhook" }, { status: 201, headers: NO_STORE });
