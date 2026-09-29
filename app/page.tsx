@@ -274,7 +274,7 @@ function Purpose() {
           <div className="purpose-case correct"><div className="case-count">MATCH / 01</div><div><small>ACTION</small><strong>Refund $74.20</strong></div><div><small>RESOURCE</small><strong className="mono">INV-28912</strong></div><DecisionBadge type="allow">ALLOW</DecisionBadge></div>
           <div className="purpose-case wrong"><div className="case-count">MISMATCH / 02</div><div><small>ACTION</small><strong>Refund $74.20</strong></div><div><small>RESOURCE</small><strong className="mono">INV-91831</strong></div><DecisionBadge type="deny">DENY</DecisionBadge></div>
         </div>
-        <div className="purpose-proof"><span>Same agent.</span><span>Same API.</span><span>Same permission.</span><strong>Different purpose.</strong></div>
+        <div className="purpose-proof">RefundAgent-14 may refund INV-28912 but is denied for INV-91831. The delegated invoice decides, not the API scope.</div>
       </div>
     </section>
   );
@@ -283,7 +283,7 @@ function Purpose() {
 function PolicyLayers() {
   return (
     <section className="policy-section">
-      <div className="policy-copy"><SectionIntro index="06" label="POLICY PRECEDENCE" title={<>AI can increase caution.<br /><em>It cannot override policy.</em></>} copy="Contextual intelligence can escalate a decision. Deterministic company rules remain immutable." /><div className="policy-principle"><SlidersHorizontal size={17} /><p>Models interpret context. <strong>Policy sets the ceiling.</strong></p></div></div>
+      <div className="policy-copy"><SectionIntro index="06" label="POLICY PRECEDENCE" title={<>AI can increase caution.<br /><em>It cannot override policy.</em></>} copy="Contextual intelligence can escalate a decision. Deterministic company rules remain immutable." /><div className="policy-principle"><SlidersHorizontal size={17} /><p>Contextual risk can escalate an allow to a required approval; it cannot loosen a signed priority-0 rule.</p></div></div>
       <div className="policy-stack">
         <div className="hard-policy"><div className="locked-label"><span>IMMUTABLE</span><span className="mono">priority 0</span></div><div className="hard-grid"><div><small>HARD POLICY</small><strong>Transfers &gt; $100,000</strong></div><ArrowRight /><div><small>REQUIRED CONTROL</small><strong>CFO approval</strong></div></div><div className="policy-hash mono">sha256 / a4e9…19f2 · signed by secops</div></div>
         <div className="context-layer"><div className="context-head"><span>CONTEXTUAL RISK</span><span className="mono">model / observe-only</span></div><div className="input-cloud">{policyInputs.map((item, i) => <span key={item}><b>0{i + 1}</b>{item}</span>)}</div></div>
