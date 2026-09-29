@@ -146,16 +146,15 @@ function Header() {
 function HomeHero() {
   return (
     <section className="hero">
-      <div className="hero-copy"><div className="eyebrow"><span>01</span> RUNTIME AUTHORIZATION</div><motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .65, ease: [.2, .8, .2, 1] }}>Authorize every<br /><em>agent action.</em></motion.h1><p>Runtime control for autonomous software. Define hard boundaries, evaluate actions in context, and require approval before risky operations execute.</p><div className="hero-actions"><Button asChild className="primary-cta"><a href="#access">Request access <ArrowDownRight size={16} /></a></Button><a className="text-link" href="#product">See how it works <ArrowRight size={15} /></a></div><div className="hero-note"><span /> Policy enforced before execution</div></div>
-      <div className="hero-visual"><div className="plot-label top">PROPOSED ACTION</div><RuntimePanel /><div className="plot-label bottom">CONTROL PLANE / US-WEST-2</div></div>
+      <div className="hero-copy"><motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .65, ease: [.2, .8, .2, 1] }}>Authorize every<br /><em>agent action.</em></motion.h1><p>Runtime control for autonomous software. Define hard boundaries, evaluate actions in context, and require approval before risky operations execute.</p><div className="hero-actions"><Button asChild className="primary-cta"><a href="#access">Request access <ArrowDownRight size={16} /></a></Button><a className="text-link" href="#product">See how it works <ArrowRight size={15} /></a></div></div>
+      <div className="hero-visual"><RuntimePanel /></div>
     </section>
   );
 }
 
-function SectionIntro({ index, label, title, copy, light = false }: { index: string; label: string; title: React.ReactNode; copy?: string; light?: boolean }) {
+function SectionIntro({ title, copy, light = false }: { title: React.ReactNode; copy?: string; light?: boolean }) {
   return (
     <div className={`section-intro ${light ? "light" : ""}`}>
-      <div className="eyebrow"><span>{index}</span> {label}</div>
       <h2>{title}</h2>
       {copy && <p>{copy}</p>}
     </div>
@@ -199,7 +198,7 @@ function CoreIdea() {
   return (
     <section className="core-section ruled" id="product">
       <div className="core-copy">
-        <SectionIntro index="02" label="THE MODEL" title={<>Permissions are static.<br /><em>Agent behavior is not.</em></>} copy="Access lists know what an identity can usually reach. Boundary evaluates whether this exact action should happen now." />
+        <SectionIntro title={<>Permissions are static.<br /><em>Agent behavior is not.</em></>} copy="Access lists know what an identity can usually reach. Boundary evaluates whether this exact action should happen now." />
         <blockquote>Identity establishes the actor.<br />Runtime authorization governs the act.</blockquote>
       </div>
       <div className="comparison-lab">
@@ -230,7 +229,7 @@ function SystemMap() {
   ] as const;
   return (
     <section className="system-section">
-      <SectionIntro index="03" label="CONTROL PLANE" title={<>One decision plane.<br />Every system boundary.</>} copy="Intercept actions before execution. Apply the same control model across agents, tools, and enterprise systems." />
+      <SectionIntro title={<>One decision plane.<br />Every system boundary.</>} copy="Intercept actions before execution. Apply the same control model across agents, tools, and enterprise systems." />
       <div className="system-map">
         <div className="map-lane left-lane"><div className="map-node source"><small>01 / ORIGIN</small><strong>USER / SYSTEM</strong></div><div className="flow-segment"><motion.span animate={{ y: [0, 54] }} transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }} /></div><div className="map-node agent"><small>02 / ACTOR</small><strong>Autonomous agent</strong><span className="mono">agt_894f</span></div><div className="flow-segment"><motion.span animate={{ y: [0, 54] }} transition={{ duration: 1.8, repeat: Infinity, ease: "linear", delay: .5 }} /></div><div className="map-node action"><small>03 / INTENT</small><strong>Proposed action</strong><span className="mono">payments.create</span></div></div>
         <div className="control-plane">
@@ -251,7 +250,7 @@ function SequenceSecurity() {
   ];
   return (
     <section className="sequence-section" id="security">
-      <div className="sequence-intro"><SectionIntro light index="04" label="SEQUENCE INTELLIGENCE" title={<>Individually safe.<br /><em>Collectively dangerous.</em></>} copy="Most authorization systems evaluate API calls independently. Boundary reads the whole execution chain." /></div>
+      <div className="sequence-intro"><SectionIntro light title={<>Individually safe.<br /><em>Collectively dangerous.</em></>} copy="Most authorization systems evaluate API calls independently. Boundary reads the whole execution chain." /></div>
       <div className="sequence-console">
         <div className="chain-meta"><span>ACTION CHAIN</span><span className="mono">chain_7D2C · LIVE</span></div>
         <div className="event-timeline">
@@ -266,7 +265,7 @@ function SequenceSecurity() {
 function Purpose() {
   return (
     <section className="purpose-section ruled">
-      <SectionIntro index="05" label="PURPOSE BINDING" title={<>Permission follows<br /><em>the task.</em></>} copy="Authority stays attached to the delegated objective—not just the agent identity or API scope." />
+      <SectionIntro title={<>Permission follows<br /><em>the task.</em></>} copy="Authority stays attached to the delegated objective—not just the agent identity or API scope." />
       <div className="purpose-diagram">
         <div className="task-card"><div className="card-kicker"><Asterisk size={14} /> DELEGATED OBJECTIVE</div><strong>Refund duplicate charge<br />for INV-28912</strong><div className="task-agent"><span>AGENT</span><b>RefundAgent-14</b></div></div>
         <div className="branch-rail"><span /><span /><span /></div>
@@ -283,7 +282,7 @@ function Purpose() {
 function PolicyLayers() {
   return (
     <section className="policy-section">
-      <div className="policy-copy"><SectionIntro index="06" label="POLICY PRECEDENCE" title={<>AI can increase caution.<br /><em>It cannot override policy.</em></>} copy="Contextual intelligence can escalate a decision. Deterministic company rules remain immutable." /><div className="policy-principle"><SlidersHorizontal size={17} /><p>Contextual risk can escalate an allow to a required approval; it cannot loosen a signed priority-0 rule.</p></div></div>
+      <div className="policy-copy"><SectionIntro title={<>AI can increase caution.<br /><em>It cannot override policy.</em></>} copy="Contextual intelligence can escalate a decision. Deterministic company rules remain immutable." /><div className="policy-principle"><SlidersHorizontal size={17} /><p>Contextual risk can escalate an allow to a required approval; it cannot loosen a signed priority-0 rule.</p></div></div>
       <div className="policy-stack">
         <div className="hard-policy"><div className="locked-label"><span>IMMUTABLE</span><span className="mono">priority 0</span></div><div className="hard-grid"><div><small>HARD POLICY</small><strong>Transfers &gt; $100,000</strong></div><ArrowRight /><div><small>REQUIRED CONTROL</small><strong>CFO approval</strong></div></div><div className="policy-hash mono">sha256 / a4e9…19f2 · signed by secops</div></div>
         <div className="context-layer"><div className="context-head"><span>CONTEXTUAL RISK</span><span className="mono">model / observe-only</span></div><div className="input-cloud">{policyInputs.map((item, i) => <span key={item}><b>0{i + 1}</b>{item}</span>)}</div></div>
@@ -297,7 +296,7 @@ function ApprovalExperience() {
   const [decision, setDecision] = useState<"idle" | "approved" | "denied">("idle");
   return (
     <section className="approval-section">
-      <div className="approval-copy"><SectionIntro index="07" label="HUMAN CHECKPOINT" title={<>The right context.<br />At the moment of decision.</>} copy="Give operators the full execution history and policy reason—without asking them to reconstruct the risk." /><div className="operator-note"><span>Designed for</span><strong>Finance · Security · Operations</strong></div></div>
+      <div className="approval-copy"><SectionIntro title={<>The right context.<br />At the moment of decision.</>} copy="Give operators the full execution history and policy reason—without asking them to reconstruct the risk." /><div className="operator-note"><span>Designed for</span><strong>Finance · Security · Operations</strong></div></div>
       <div className="approval-window">
         <div className="window-bar"><div><span /><span /><span /></div><span className="mono">approval / apr_8F92A</span><button aria-label="More approval options">•••</button></div>
         <div className="approval-alert"><div className="approval-icon"><Clock3 /></div><div><small>AUTHORIZATION REQUIRED</small><strong>Transfer $48,220.00</strong><p>A policy condition requires a human decision before execution.</p></div><span className="expires">EXPIRES 09:42</span></div>
@@ -314,7 +313,7 @@ function ApprovalExperience() {
 function DeveloperExperience() {
   return (
     <section className="developer-section" id="developers">
-      <div className="dev-intro"><SectionIntro light index="08" label="DEVELOPER EXPERIENCE" title={<>One decision<br /><em>endpoint.</em></>} copy="Place a single authorization call in front of consequential operations. Boundary returns a decision your system can enforce." /><div className="protocols">{["REST", "MCP", "GraphQL", "gRPC", "webhooks"].map(x => <span key={x}>{x}</span>)}</div></div>
+      <div className="dev-intro"><SectionIntro light title={<>One decision<br /><em>endpoint.</em></>} copy="Place a single authorization call in front of consequential operations. Boundary returns a decision your system can enforce." /><div className="protocols">{["REST", "MCP", "GraphQL", "gRPC", "webhooks"].map(x => <span key={x}>{x}</span>)}</div></div>
       <div className="code-workbench">
         <Tabs defaultValue="request" className="code-tabs">
           <div className="code-toolbar"><TabsList variant="line"><TabsTrigger value="request">authorize.ts</TabsTrigger><TabsTrigger value="response">response.json</TabsTrigger></TabsList><button aria-label="Copy code"><Copy size={14} /> Copy</button></div>
@@ -330,7 +329,7 @@ function DeveloperExperience() {
 function IdentityStack() {
   return (
     <section className="identity-section">
-      <SectionIntro index="09" label="INFRASTRUCTURE FIT" title={<>Works with the identity stack<br /><em>you already have.</em></>} copy="Boundary complements identity providers and existing RBAC. It does not replace them." />
+      <SectionIntro title={<>Works with the identity stack<br /><em>you already have.</em></>} copy="Boundary complements identity providers and existing RBAC. It does not replace them." />
       <div className="identity-diagram">
         <div className="provider-field"><div className="field-label">IDENTITY PROVIDERS</div>{["Microsoft Entra", "Okta", "Auth0", "WorkOS", "AWS IAM", "Existing RBAC"].map((x, i) => <div key={x}><span>{String(i + 1).padStart(2, "0")}</span>{x}<Check size={13} /></div>)}</div>
         <div className="distinction"><div className="identity-side"><Fingerprint /><small>IDENTITY PROVIDER</small><strong>Who is acting?</strong><span>Authentication + broad access</span></div><div className="versus">+</div><div className="boundary-side"><Mark /><small>BOUNDARY</small><strong>Should this action execute?</strong><span>Purpose + context + sequence</span></div></div>
@@ -344,7 +343,7 @@ function AuditRecorder() {
   const filtered = auditEvents.filter(row => row.join(" ").toLowerCase().includes(query.toLowerCase()));
   return (
     <section className="audit-section">
-      <div className="audit-head"><SectionIntro index="10" label="FLIGHT RECORDER" title={<>Every decision.<br />Every reason.</>} copy="Reconstruct the full story across principals, agents, actions, resources, policy checks, approvals, and outcomes." /><div className="audit-meta"><span><b>365d</b> default retention</span><span><b>JSON</b> export</span><span><b>SIEM</b> streaming</span></div></div>
+      <div className="audit-head"><SectionIntro title={<>Every decision.<br />Every reason.</>} copy="Reconstruct the full story across principals, agents, actions, resources, policy checks, approvals, and outcomes." /><div className="audit-meta"><span><b>365d</b> default retention</span><span><b>JSON</b> export</span><span><b>SIEM</b> streaming</span></div></div>
       <div className="audit-console">
         <div className="audit-toolbar"><label><Search size={15} /><input aria-label="Search audit events" value={query} onChange={e => setQuery(e.target.value)} placeholder="Search events..." /></label><div className="filter-row">{["agent", "principal", "action", "decision", "resource", "risk"].map(x => <button key={x}>{x}<ChevronDown size={12} /></button>)}</div></div>
         <div className="audit-table"><div className="audit-table-head"><span>TIME</span><span>EVENT</span><span>DECISION / ACTOR</span><span>TRACE</span></div>{filtered.map(([time, event, actor, type], i) => <div className="audit-row" key={time + event}><time>{time}</time><div className="audit-event"><span className={`audit-dot ${type}`} /><strong>{event}</strong></div><div>{type === "allow" ? <DecisionBadge type="allow">{actor}</DecisionBadge> : type === "approval" ? <DecisionBadge type="approval">{actor}</DecisionBadge> : type === "human" ? <span className="human-actor">{actor}</span> : <span>{actor}</span>}</div><span className="mono trace">{`tr_0${i + 41}c`}</span></div>)}{filtered.length === 0 && <div className="audit-empty">No events match “{query}”.</div>}</div>
