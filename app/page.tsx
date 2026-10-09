@@ -120,7 +120,7 @@ function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="site-header">
-      <a className="brand" href="#top" aria-label="Boundary home"><Mark /><span>BOUNDARY</span></a>
+      <a className="brand" href="#top" aria-label="Ostrelio home"><Mark /><span>OSTRELIO</span></a>
       <nav className="desktop-nav" aria-label="Main navigation">
         <a href="#product">Product</a><a href="#developers">Developers</a><a href="#security">Security</a>
       </nav>
@@ -198,7 +198,7 @@ function CoreIdea() {
   return (
     <section className="core-section ruled" id="product">
       <div className="core-copy">
-        <SectionIntro title={<>Permissions are static.<br /><em>Agent behavior is not.</em></>} copy="Access lists know what an identity can usually reach. Boundary evaluates whether this exact action should happen now." />
+        <SectionIntro title={<>Permissions are static.<br /><em>Agent behavior is not.</em></>} copy="Access lists know what an identity can usually reach. Ostrelio evaluates whether this exact action should happen now." />
         <blockquote>Identity establishes the actor.<br />Runtime authorization governs the act.</blockquote>
       </div>
       <div className="comparison-lab">
@@ -250,7 +250,7 @@ function SequenceSecurity() {
   ];
   return (
     <section className="sequence-section" id="security">
-      <div className="sequence-intro"><SectionIntro light title={<>Individually safe.<br /><em>Collectively dangerous.</em></>} copy="Most authorization systems evaluate API calls independently. Boundary reads the whole execution chain." /></div>
+      <div className="sequence-intro"><SectionIntro light title={<>Individually safe.<br /><em>Collectively dangerous.</em></>} copy="Most authorization systems evaluate API calls independently. Ostrelio reads the whole execution chain." /></div>
       <div className="sequence-console">
         <div className="chain-meta"><span>ACTION CHAIN</span><span className="mono">chain_7D2C · LIVE</span></div>
         <div className="event-timeline">
@@ -313,7 +313,7 @@ function ApprovalExperience() {
 function DeveloperExperience() {
   return (
     <section className="developer-section" id="developers">
-      <div className="dev-intro"><SectionIntro light title={<>One decision<br /><em>endpoint.</em></>} copy="Place a single authorization call in front of consequential operations. Boundary returns a decision your system can enforce." /><div className="protocols">{["REST", "MCP", "GraphQL", "gRPC", "webhooks"].map(x => <span key={x}>{x}</span>)}</div></div>
+      <div className="dev-intro"><SectionIntro light title={<>One decision<br /><em>endpoint.</em></>} copy="Place a single authorization call in front of consequential operations. Ostrelio returns a decision your system can enforce." /><div className="protocols">{["REST", "MCP", "GraphQL", "gRPC", "webhooks"].map(x => <span key={x}>{x}</span>)}</div></div>
       <div className="code-workbench">
         <Tabs defaultValue="request" className="code-tabs">
           <div className="code-toolbar"><TabsList variant="line"><TabsTrigger value="request">authorize.ts</TabsTrigger><TabsTrigger value="response">response.json</TabsTrigger></TabsList><button aria-label="Copy code"><Copy size={14} /> Copy</button></div>
@@ -329,10 +329,10 @@ function DeveloperExperience() {
 function IdentityStack() {
   return (
     <section className="identity-section">
-      <SectionIntro title={<>Works with the identity stack<br /><em>you already have.</em></>} copy="Boundary complements identity providers and existing RBAC. It does not replace them." />
+      <SectionIntro title={<>Works with the identity stack<br /><em>you already have.</em></>} copy="Ostrelio complements identity providers and existing RBAC. It does not replace them." />
       <div className="identity-diagram">
         <div className="provider-field"><div className="field-label">IDENTITY PROVIDERS</div>{["Microsoft Entra", "Okta", "Auth0", "WorkOS", "AWS IAM", "Existing RBAC"].map((x, i) => <div key={x}><span>{String(i + 1).padStart(2, "0")}</span>{x}<Check size={13} /></div>)}</div>
-        <div className="distinction"><div className="identity-side"><Fingerprint /><small>IDENTITY PROVIDER</small><strong>Who is acting?</strong><span>Authentication + broad access</span></div><div className="versus">+</div><div className="boundary-side"><Mark /><small>BOUNDARY</small><strong>Should this action execute?</strong><span>Purpose + context + sequence</span></div></div>
+        <div className="distinction"><div className="identity-side"><Fingerprint /><small>IDENTITY PROVIDER</small><strong>Who is acting?</strong><span>Authentication + broad access</span></div><div className="versus">+</div><div className="boundary-side"><Mark /><small>OSTRELIO</small><strong>Should this action execute?</strong><span>Purpose + context + sequence</span></div></div>
       </div>
     </section>
   );
@@ -401,14 +401,14 @@ function FinalCTA() {
       <div className="cta-mark"><Mark /></div>
       <h2>Let agents act.<br /><em>Keep control.</em></h2>
       <p>Build autonomous systems your company can actually trust.</p>
-      {submitted ? <motion.div className="access-success" role="status" aria-live="polite" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}><CheckCircle2 /> Thanks — we received your request and will reply within 2 business days.</motion.div> : <><form className="access-form access-form-extended" noValidate onSubmit={requestAccess}><label><span>WORK EMAIL</span><input name="email" required type="email" autoComplete="email" maxLength={254} placeholder="you@company.com" /></label><label><span>COMPANY (OPTIONAL)</span><input name="company" type="text" autoComplete="organization" maxLength={120} placeholder="Example Co" /></label><label><span>USE CASE (OPTIONAL)</span><input name="useCase" type="text" maxLength={1000} placeholder="What should agents be allowed to do?" /></label><label><span>HOW DID YOU HEAR ABOUT US?</span><select name="source" defaultValue="website"><option value="website">Website</option><option value="referral">Referral</option><option value="event">Event</option><option value="outbound">Outbound</option></select></label><label className="access-consent"><input name="consent" type="checkbox" required aria-describedby="consent-note" /><span id="consent-note">I agree Boundary may use my contact details to reply to this request. See <a href="/privacy">Privacy</a>.</span></label><div className="access-honeypot" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div><Button type="submit" disabled={submitting}>{submitting ? "Submitting…" : "Request access"} <ArrowRight size={16} /></Button></form>{deliveryMessage && <p className="access-info" role="status">{deliveryMessage}</p>}{error && <p className="access-error" role="alert">{error}</p>}</>}
+      {submitted ? <motion.div className="access-success" role="status" aria-live="polite" initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}><CheckCircle2 /> Thanks — we received your request and will reply within 2 business days.</motion.div> : <><form className="access-form access-form-extended" noValidate onSubmit={requestAccess}><label><span>WORK EMAIL</span><input name="email" required type="email" autoComplete="email" maxLength={254} placeholder="you@company.com" /></label><label><span>COMPANY (OPTIONAL)</span><input name="company" type="text" autoComplete="organization" maxLength={120} placeholder="Example Co" /></label><label><span>USE CASE (OPTIONAL)</span><input name="useCase" type="text" maxLength={1000} placeholder="What should agents be allowed to do?" /></label><label><span>HOW DID YOU HEAR ABOUT US?</span><select name="source" defaultValue="website"><option value="website">Website</option><option value="referral">Referral</option><option value="event">Event</option><option value="outbound">Outbound</option></select></label><label className="access-consent"><input name="consent" type="checkbox" required aria-describedby="consent-note" /><span id="consent-note">I agree Ostrelio may use my contact details to reply to this request. See <a href="/privacy">Privacy</a>.</span></label><div className="access-honeypot" aria-hidden="true"><label>Website<input name="website" tabIndex={-1} autoComplete="off" /></label></div><Button type="submit" disabled={submitting}>{submitting ? "Submitting…" : "Request access"} <ArrowRight size={16} /></Button></form>{deliveryMessage && <p className="access-info" role="status">{deliveryMessage}</p>}{error && <p className="access-error" role="alert">{error}</p>}</>}
       <a className="talk-link" href="mailto:hello@boundary.dev">Talk to us <ArrowDownRight size={14} /></a>
     </section>
   );
 }
 
 function Footer() {
-  return <footer><a className="brand" href="#top"><Mark /><span>BOUNDARY</span></a><div className="footer-links"><a href="#product">Product</a><a href="#developers">Developers</a><a href="#security">Security</a><a href="mailto:hello@boundary.dev">Company</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div><div className="footer-note"><span /> SYSTEMS OPERATIONAL <b>© 2026</b></div></footer>;
+  return <footer><a className="brand" href="#top"><Mark /><span>OSTRELIO</span></a><div className="footer-links"><a href="#product">Product</a><a href="#developers">Developers</a><a href="#security">Security</a><a href="mailto:hello@boundary.dev">Company</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div><div className="footer-note"><span /> SYSTEMS OPERATIONAL <b>© 2026</b></div></footer>;
 }
 
 export default function Home() {

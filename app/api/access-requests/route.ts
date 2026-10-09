@@ -12,7 +12,7 @@ function mailtoUrl(lead: {
   source: string;
 }) {
   const recipient = process.env.ACCESS_REQUEST_EMAIL || "hello@boundary.dev";
-  const subject = `Boundary access request${lead.company ? ` — ${lead.company}` : ""}`;
+  const subject = `Ostrelio access request${lead.company ? ` — ${lead.company}` : ""}`;
   const body = [
     `Work email: ${lead.email}`,
     `Company: ${lead.company || "Not provided"}`,
