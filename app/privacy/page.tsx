@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 export const metadata = {
-  title: "Privacy — Boundary",
-  description: "How Boundary handles Request access contact details.",
+  title: "Privacy — Ostrelio",
+  description: "How Ostrelio handles Request access contact details.",
 };
 
 export default function PrivacyPage() {
@@ -25,7 +25,7 @@ export default function PrivacyPage() {
         <p>
           We use these details only to reply to your request and evaluate pilot fit. On the default
           website deployment, submitting the form opens a prefilled message in your email application
-          and the website does not store the form. If Boundary configures a server-side lead webhook,
+          and the website does not store the form. If Ostrelio configures a server-side lead webhook,
           the validated details are sent only to that private lead handler. Lead data is never sent to
           Jev or another decision-model provider.
         </p>
@@ -33,7 +33,7 @@ export default function PrivacyPage() {
       <section className="space-y-2 text-sm leading-6">
         <h2 className="text-lg font-semibold">Who can access</h2>
         <p>
-          Only authorized Boundary operators and the configured email or lead-service provider can
+          Only authorized Ostrelio operators and the configured email or lead-service provider can
           process submitted requests. There is no public lead listing and no ad tracking on this form.
         </p>
       </section>
@@ -47,7 +47,7 @@ export default function PrivacyPage() {
         </p>
       </section>
       <p className="text-sm">
-        <Link className="underline" href="/">Back to Boundary</Link> · <Link className="underline" href="/terms">Terms</Link>
+        <Link className="underline" href="/">Back to Ostrelio</Link> · <Link className="underline" href="/terms">Terms</Link>
       </p>
     </main>
   );
